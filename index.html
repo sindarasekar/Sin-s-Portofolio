@@ -79,6 +79,8 @@ nav ul a:hover{color:var(--text)}
 .tl h4{color:var(--cyan);font-weight:600;font-size:.95rem}
 .tl .date{color:var(--mute);font-size:.85rem;margin:2px 0 8px}
 .tl p{color:var(--mute);font-size:.92rem}
+.tl .pic{aspect-ratio:16/9;border-radius:12px;overflow:hidden;margin-bottom:14px}
+.tl .pic img{width:100%;height:100%;object-fit:cover}
 [hidden]{display:none!important}
 
 /* offer */
@@ -216,11 +218,11 @@ footer{text-align:center;padding:28px 0;color:var(--mute);font-size:.88rem;borde
    Taruh gambar di folder assets/img/ lalu isi path-nya.
    ===================================================== */
 const DATA = {
-  brand: "SINDARA",
+  brand: "Sin's PORTOFOLIO",
   name: "SINDARA SEKAR PRAMESWARI",
-  roles: ["Komunikatif", "Computer Engineering", "Ramah"],
-  photo: "pfp.png",                       // contoh: "assets/img/hero.png"
-  aboutPhoto: "",                  // contoh: "assets/img/about.png"
+  roles: ["Computer Engineering", "FT UNNES", ""],
+  photo: "assets/img/pfp.png",                       // contoh: "assets/img/hero.png"
+  aboutPhoto: "assets/img/about.png",                  // contoh: "assets/img/about.png"
   resume: "",                      // contoh: "assets/pdf/CV-Nama.pdf"
   socials: [
     { label: "LinkedIn",  url: "https://linkedin.com/in/sindara-prameswari-080764320/" },
@@ -229,20 +231,32 @@ const DATA = {
   ],
   about: {
     title: "About Me",
-    text: "Saya <b>mahasiswa Teknik</b> yang suka mengeksplorasi <b>skill baru dan kreativitas</b>. Tulis perkenalan singkat kamu di sini (boleh pakai tag b untuk menebalkan)."
+    text: "Saya mahasiswa Teknik yang suka mengeksplorasi skill baru dan kreativitas. Saya cukup berpengalaman dalam mengelola website dan mengoperasikan OBS studio sekalius sound system. Didalam kampus saya aktif beroranisasi di Himpunan FT UNNES sebagai Divisi TIK. saya memiliki hobi menggambar dan membuat ilustrasi maupun visual yang sulit dimengerti orang. Fun fact saya tidak suka minum kopi dan makan pedas."
   },
   projects: [
-    { tag: "AI",      title: "Melanoma Detection Using Transfer Learning: A Comparative Study of ResNet50, EfficientNetB3, and MobileNetV2 on Dermoscopic Images", stack: "Training Model, Riset, Publish Jurnal", image: "metopen.png", link: "#" },
-    { tag: "Hardware", title: "Smart Solar Tracker use PID Controller", stack: "Arduino, Sensor LDR, Motor DC, Phyton",   image: "SystemControl.png", link: "#" },
-    { tag: "App",      title: "SienceHub Education App", stack: "Android studio, GitHub, Kotlin, SQL",         image: "Sciencehub.png", link: "#" },
-    { tag: "Web",      title: "smpnsatujapah.sch.id", stack: "HTML, Javascript, Bisnis",image: "smpn1japah.png", link: "#" }
+    { tag: "AI",      title: "Melanoma Detection Using Transfer Learning: A Comparative Study of ResNet50, EfficientNetB3, and MobileNetV2 on Dermoscopic Images", stack: "Training Model, Riset, Publish Jurnal", image: "assets/img/metopen.png", link: "#" },
+    { tag: "Hardware", title: "Smart Solar Tracker use PID Controller", stack: "Arduino, Sensor LDR, Motor DC, Phyton",   image: "assets/img/smartsolar.png", link: "#" },
+    { tag: "App",      title: "SienceHub Education App", stack: "Android studio, GitHub, Kotlin, SQL",         image: "assets/img/Sciencehub.png", link: "#" },
+    { tag: "Web",      title: "smpnsatujapah.sch.id", stack: "HTML, Javascript, Bisnis",image: "", link: "#" }
   ],
   experience: [
-    { title: "Staf Ahli", place: "Departemen F HIMPROTE FT UNNES", date: "2025 - Sekarang", desc: "Selama Menjadi Staf Ahli Departemen Teknologi Informasi dan Komunikasi di HIMPROTE saya banyak belajar mengenai Adobe dan sudah menguasai Canva, Aligh Motion dan Mengelola Sosial Media secara utuh." },
-    { title: "Staf Kominfo", place: "HMW FT UNNES", date: "2025 - 2026",     desc: "Saat berada di Kominfo HMW FT UNNES saya banyak belajar mengenai pembuatan desain promosi yang efektif untuk menarik minat klien." },
-    { title: "Ketua Pelaksana", place: "Pelatihan Medis Panitia PKKMB Elektro UNNES", date: "2026",     desc: "Acara Pelatihan Medis ini bisa dibilang berjalan dengan lancar meskipun ada beberapa problem yang masih bisa ditangani.." },
-    { title: "Sie PDD", place: "PMKTE UNNES", date: "2026",     desc: "Pelatihan Menejemen Kepemimpinan Teknik Elektro (PMKTE) adalah Program Kerja besar dengan 400 Peserta. Menjadi Koordinator Sie PDD dengan 3 anggota di acara besar membuat saya belajar menghargai waktu dan lebih menguasai canva." },
-    { title: "Moderator", place: "Dialog Akademik", date: "2025",     desc: "Sie Acara Sekaligus Moderator yang menghimpun mahasiswa teknik Elektro untuk berkeluh kesah mengenai fasilitas, sarpras, dan SDM di Lingkungan Teknik Elektro melalui sosialisasi advokasi." },
+    { title: "Staf Ahli", place: "Departemen F HIMPROTE FT UNNES", date: "2025 - Sekarang", image: "himprote.png" ,desc: "Selama Menjadi Staf Ahli Departemen Teknologi Informasi dan Komunikasi di HIMPROTE saya banyak belajar mengenai Adobe dan sudah menguasai Canva, Aligh Motion dan Mengelola Sosial Media secara utuh." },
+    { title: "Staf Kominfo", place: "HMW FT UNNES", date: "2025 - 2026",  image: "hmw.png",   desc: "Saat berada di Kominfo HMW FT UNNES saya banyak belajar mengenai pembuatan desain promosi yang efektif untuk menarik minat klien." },
+    { title: "Ketua Pelaksana", place: "Pelatihan Medis Panitia PKKMB Elektro UNNES", date: "2026",   image: "medis.png",  desc: "Dari Pengalaman ini saya belajar cara berkomunikasi dengan baik dan mengatur waktu selama persiapan dan pelaksanaan acara." },
+    { title: "Sekretaris", place: "Class Multimedia Skill 2026", date: "2026",   image: "sekrecms.png",  desc: "Saat Menjadi Sekretaris Program Kerja saya belajar mengelola persuratan yang masuk dan keluar, pembuatan proposal yang sah,  Menyusun agenda rapat,  menyusun caption, notulensi, dan laporan kegiatan ." },
+    { title: "Koordinator Sie PDD", place: "EXPO 2025", date: "2025",   image: "expo.png",  desc: "Pengalaman pertama menjadi koordinator divisi dengan SDM sedikit dan timeline yang singkat membuat saya belajar menguasai situasi dan kodisi dilapangan saat dokumentasi penting berlangsung." },
+    { title: "Koordinator Sie PDD", place: "Pelatihan Administrasi 2026", date: "2026",   image: "pas.png",  desc: "Dalam acara ini saya dipercaya Menjadi Operator OBS dan sound system." },
+    { title: "PDD", place: "ECO PLAN", date: "2026",   image: "ecoplan.png",  desc: "Menjadi PDD pada acara ini saya belajar mengelola sosial media dan menyebarkan informasi secara visual dan interaktif. " },
+    { title: "Sie Perkap", place: "Open Recruitmen HIMPROTE", date: "2025",   image: "oprec.png",  desc: "Pelatihan Menejemen Kepemimpinan Teknik Elektro (PMKTE) adalah Program Kerja besar dengan 400 Peserta. Menjadi Koordinator Sie PDD dengan 3 anggota di acara besar membuat saya belajar menghargai waktu dan lebih menguasai canva." },
+    { title: "Sie Kestari", place: "GEMASTE X EXPO 2026", date: "2026",   image: "gemaste.png",  desc: "Pelatihan Menejemen Kepemimpinan Teknik Elektro (PMKTE) adalah Program Kerja besar dengan 400 Peserta. Menjadi Koordinator Sie PDD dengan 3 anggota di acara besar membuat saya belajar menghargai waktu dan lebih menguasai canva." },
+    { title: "Sie Acara", place: "PILMAPRES 2027", date: "2026",   image: "pilmapres.png",  desc: "Pelatihan Menejemen Kepemimpinan Teknik Elektro (PMKTE) adalah Program Kerja besar dengan 400 Peserta. Menjadi Koordinator Sie PDD dengan 3 anggota di acara besar membuat saya belajar menghargai waktu dan lebih menguasai canva." },
+    { title: "Sie Humas", place: "Electrical cup 2025", date: "2025",   image: "elcup.png",  desc: "Pelatihan Menejemen Kepemimpinan Teknik Elektro (PMKTE) adalah Program Kerja besar dengan 400 Peserta. Menjadi Koordinator Sie PDD dengan 3 anggota di acara besar membuat saya belajar menghargai waktu dan lebih menguasai canva." },
+    { title: "Sie Humas", place: "Fundin Talk 2026", date: "2026",   image: "fundingtalk.png",  desc: "Pelatihan Menejemen Kepemimpinan Teknik Elektro (PMKTE) adalah Program Kerja besar dengan 400 Peserta. Menjadi Koordinator Sie PDD dengan 3 anggota di acara besar membuat saya belajar menghargai waktu dan lebih menguasai canva." },
+    { title: "Koordinator Sie P3K", place: "ELCO 2026", date: "2026",   image: "p3k.png",  desc: "Pelatihan Menejemen Kepemimpinan Teknik Elektro (PMKTE) adalah Program Kerja besar dengan 400 Peserta. Menjadi Koordinator Sie PDD dengan 3 anggota di acara besar membuat saya belajar menghargai waktu dan lebih menguasai canva." },
+    { title: "Pendamping Mahasiswa baru Teknik Elektro", place: "ELCO 2025", date: "2025",   image: "ikpk.png",  desc: "Pelatihan Menejemen Kepemimpinan Teknik Elektro (PMKTE) adalah Program Kerja besar dengan 400 Peserta. Menjadi Koordinator Sie PDD dengan 3 anggota di acara besar membuat saya belajar menghargai waktu dan lebih menguasai canva." },
+    { title: "Presidium III", place: "MTMTE 2025 FT UNNES", date: "2026",   image: "presshimprote.png",  desc: "Pelatihan Menejemen Kepemimpinan Teknik Elektro (PMKTE) adalah Program Kerja besar dengan 400 Peserta. Menjadi Koordinator Sie PDD dengan 3 anggota di acara besar membuat saya belajar menghargai waktu dan lebih menguasai canva." },
+    { title: "Presidium III", place: "Pamuker HMW FT UNNES", date: "2026",   image: "presshmw.png",  desc: "Pelatihan Menejemen Kepemimpinan Teknik Elektro (PMKTE) adalah Program Kerja besar dengan 400 Peserta. Menjadi Koordinator Sie PDD dengan 3 anggota di acara besar membuat saya belajar menghargai waktu dan lebih menguasai canva." },
+    { title: "Moderator", place: "Dialog Akademik", date: "2025",  image: "dimik.png",   desc: "Sie Acara Sekaligus Moderator yang menghimpun mahasiswa teknik Elektro untuk berkeluh kesah mengenai fasilitas, sarpras, dan SDM di Lingkungan Teknik Elektro melalui sosialisasi advokasi." },
 
 
   ],
@@ -254,17 +268,19 @@ const DATA = {
 
 
   ],
-  skillsBox: { title: "Technical Skills", text: "Ringkasan keahlian utama kamu." },
-  skills: ["MATLAB", "Python", "Arduino", "C++", "Digital Signal Processing", "Control Systems"],
-  toolsBox: { title: "Tools I Use", text: "Tools yang membantu kerja kamu." },
-  tools: ["VS Code", "MATLAB", "Arduino IDE", "Git", "GitHub", "Figma"],
+  skillsBox: { title: "Technical Skills", text: "Saya mampu mengaplikasikan ide saya dengan baik dan mengomunikasikannya melalui media informatif." },
+  skills: ["MATLAB", "Python", "Arduino", "HTML", "SQL", "PHP","Javasript"],
+  skillsBox: { title: "Soft Skills", text: "Saya mampu berbicara didepan banyak orang, dan menjadi orang yang komunikatif di dalam tim. berdasarkan pengalaman berorganisasi manajemen waktu saya dinilai baik." },
+  skills: ["Komunikatif", "Public Speaking", "Disiplin", "Berpenampilan rapi", "Bekerja dalam Tim", "Kreativitas"],
+  toolsBox: { title: "Tools I Use", text: "Berikut adalah Tools yang saya gunakan untuk membantu saya bekerja." },
+  tools: ["VS Code", "MATLAB", "Arduino IDE", "HTML", "Adobe Photoshop", "VS Code" , "GitHub", "Figma", "SQL", "Canva"],
   testimonials: [
-    { photo: "", role: "Dosen / Mentor",  rating: "5.0", text: "Tulis testimoni dari dosen, mentor, atau teman tim di sini." },
-    { photo: "", role: "Ketua Tim",       rating: "5.0", text: "Tulis testimoni kedua di sini." },
-    { photo: "", role: "Teman Kelompok",  rating: "5.0", text: "Tulis testimoni ketiga di sini." }
+    { photo: "", role: "Dosen",  rating: "4.9", text: "Sejujurnya Kelompok kalian adalah kelompok terbaik dan paling rapi dalam penulisan, risetnya juga sudah sangat bagus sekali setara Q3 Scopus. (AI)" },
+    { photo: "", role: "Ketua Tim",       rating: "5.0", text: "Kemampuan Sindara Sudah memumpuni untuk membuat sumulasi rangkaian dan cara kerjanya, ide project ini juga berasal dari sindara. (Smart Solar Tracker)" },
+    { photo: "", role: "Teman Kelompok",  rating: "5.0", text: "Pas ngerjain Aplikasi, sindara orang yang sering mengajukan ide-ide kreatif dan mampu mengimplementasikannya.(Science Hub APP)" }
   ],
   contact: {
-    intro: "Ceritakan project kamu selanjutnya.",
+    intro: "Jika saya diberikesempatan untuk magang di instansi sebisa mungkin saya akan menerahkan seluruh kemampuan yang saya punya untuk perusahaan dan mempelajari hal-hal baru semasa menjalankan magang. saya harap dengan diterimanya saya magang di perusahaan bapak/ibu bisa menjadi inovasi baru bagi perusahaan.",
     email: "sindarasekarhem@gmail.com",
     location: "Semarang, Jawa Tengah, Indonesia",
     message: [
@@ -309,7 +325,10 @@ $('projectGrid').innerHTML = DATA.projects.map((p, i) => `
   </article>`).join('');
 
 const tl = arr => arr.map(e => `
-  <div class="tl"><h3>${e.title}</h3><h4>${e.place}</h4><div class="date">${e.date}</div><p>${e.desc}</p></div>`).join('');
+  <div class="tl">
+    ${e.image ? `<div class="pic"><img src="${e.image}" alt="${e.title}" loading="lazy"></div>` : ''}
+    <h3>${e.title}</h3><h4>${e.place}</h4><div class="date">${e.date}</div><p>${e.desc}</p>
+  </div>`).join('');
 $('exp').innerHTML = tl(DATA.experience);
 $('edu').innerHTML = tl(DATA.education);
 document.querySelectorAll('.tabs button').forEach(b => b.onclick = () => {
