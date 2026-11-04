@@ -76,22 +76,21 @@ nav ul a:hover{color:var(--text)}
 .tabs button{padding:10px 26px;border-radius:999px;border:1px solid var(--line);background:none;color:var(--mute);font:inherit;font-weight:600;cursor:pointer;transition:.2s}
 .tabs button.on{background:var(--blue);border-color:var(--blue);color:#fff}
 .timeline{max-width:760px;margin:0 auto;border-left:2px solid var(--line);padding-left:28px;display:grid;gap:18px}
-.tl{position:relative;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:20px}
+.tl{position:relative;display:flex;gap:18px;align-items:flex-start;justify-content:space-between;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:20px}
 .tl::before{content:"";position:absolute;left:-37px;top:26px;width:14px;height:14px;border-radius:50%;background:var(--blue);box-shadow:0 0 0 4px var(--bg)}
+.tl .txt{flex:1;min-width:0}
 .tl h3{font-size:1.1rem}
 .tl h4{color:var(--cyan);font-weight:600;font-size:.95rem}
 .tl .date{color:var(--mute);font-size:.85rem;margin:2px 0 8px}
 .tl p{color:var(--mute);font-size:.92rem}
-.tl{display:flex;gap:18px;align-items:flex-start;justify-content:space-between}
-.tl .txt{flex:1;min-width:0}
 .tl .pic{flex:none;width:160px;aspect-ratio:1;border-radius:12px;overflow:hidden;border:1px solid var(--line)}
-@media(max-width:820px){.tl .pic{width:96px}}
 .tl .pic img{width:100%;height:100%;object-fit:cover}
-@media(max-width:820px){.tl .pic{width:64px}}
+[hidden]{display:none!important}
+@media(max-width:820px){.tl .pic{width:96px}}
 
 /* offer */
 #offer{background:var(--bg2)}
-.offer{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.offer{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px}
 .box{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:28px}
 .box h3{font-size:1.4rem;margin-bottom:8px}
 .box>p{color:var(--mute);margin-bottom:18px;font-size:.95rem}
@@ -194,6 +193,7 @@ footer{text-align:center;padding:28px 0;color:var(--mute);font-size:.88rem;borde
   <h2 class="title">My Skill</h2>
   <div class="offer">
     <div class="box"><h3 id="skillTitle"></h3><p id="skillText"></p><ul class="chips" id="skills"></ul></div>
+    <div class="box"><h3 id="softTitle"></h3><p id="softText"></p><ul class="chips" id="soft"></ul></div>
     <div class="box"><h3 id="toolTitle"></h3><p id="toolText"></p><ul class="chips" id="tools"></ul></div>
   </div>
 </div></section>
@@ -248,7 +248,7 @@ const DATA = {
   projects: [
     { tag: "AI",      title: "Melanoma Detection Using Transfer Learning: A Comparative Study of ResNet50, EfficientNetB3, and MobileNetV2 on Dermoscopic Images", stack: "Training Model, Riset, Publish Jurnal", image: "metopen.png", link: "https://drive.google.com/file/d/1TQtw8IIYTzgAankqp2lMUInVoC1Sg8lq/view?usp=sharing" },
     { tag: "Hardware", title: "Smart Solar Tracker use PID Controller", stack: "Arduino, Sensor LDR, Motor DC, Phyton",   image: "smartsolar.png", link: "https://drive.google.com/file/d/1BeML4FmaLb0tEy_ilJazfbrUUZO3qvux/view?usp=sharing" },
-    { tag: "App",      title: "SienceHub Education App", stack: "Android studio, GitHub, Kotlin, SQL",         image: "Sciencehub.png", link: "" },
+    { tag: "App",      title: "SienceHub Education App", stack: "Android studio, GitHub, Kotlin, SQL",         image: "Sciencehub.png", link: "https://drive.google.com/file/d/1hXYFhzf6q0hD3zh3g5ABB-GxIkPpmzJ3/view?usp=sharing" },
     { tag: "Web",      title: "smpnsatujapah.sch.id", stack: "HTML, Javascript, Bisnis",image: "smpn1japah.png", link: "smpnsatujapah.sch.id" },
     { tag: "Jaringan Komputer", title: "Membangun Simulasi Jaringan Komputer Di Gedung D4 Fakultas Matematika Dan Ilmu Pengetahuan Alam Universitas Negeri Semarang", stack: "Analisis Gedung, Cisco treacer, Gambar Teknik",image: "jarkom.png", link: "https://drive.google.com/file/d/1dwad3QTvORkI9UUCbkJdVj7tPo57d3jL/view?usp=sharing" },
     { tag: "Hardware",      title: "Smart Skin Detector for perfect cushion selection", stack: "Arduino, Sensor Warna, KNN.",image: "smartskin.png", link: "https://drive.google.com/file/d/1YpNxUBNyzHQAweitoLu_v6Smu2FuDIwM/view?usp=sharing" },
@@ -289,18 +289,19 @@ const DATA = {
   { tag: "Pelatihan", title: "Pelatihan Public Speaking", issuer: "B1G FAIR", date: "2025", image: "ps.png", link: "https://drive.google.com/file/d/13pAqoS6pRK7QAPZYyS4YUANeNDg4PxfH/view?usp=sharing" },
   { tag: "Pelatihan", title: "Pelatihan Career Preparation", issuer: "B1G FAIR in collaboration with BEM FEB UPGRIS", date: "2025", image: "cp.png", link: "https://drive.google.com/file/d/1-P5EKZ0Cq7sYJ1F9U41-UgvovBPlEgBj/view?usp=sharing" },
   { tag: "Pelatihan", title: "Pelatihan Entrepreneur", issuer: "B1G FAIR in collaboration with BEM FEB UNNES", date: "2025", image: "ep.png", link: "https://drive.google.com/file/d/1Lpaxu7otZJlrQrv5UbSXIs98scuQLh1C/view?usp=sharing" },
-  { tag: "Penghargaan",  title: "Trust Trainingg Partners", issuer: "Microsoft Office", date: "2025", image: "microsoft.png", link: "https://drive.google.com/file/d/1DIaBYQCerHEd7HoxyEneBVcT0Hw1a6JZ/view?usp=sharing" },
+  { tag: "Penghargaan",  title: "Trust Training Partners", issuer: "Microsoft Office", date: "2025", image: "microsoft.png", link: "https://drive.google.com/file/d/1DIaBYQCerHEd7HoxyEneBVcT0Hw1a6JZ/view?usp=sharing" },
   { tag: "Penghargaan",  title: "International Youth Goals Singapre,Malaysia and Thailand Batch 2", issuer: "B1G FAIR in collaboration with Olpedia Education Center", date: "2025", image: "iyg.png", link: "https://drive.google.com/file/d/1qFVByK_ff28Xg6Zmge-sPuwmLo8kNw8Y/view?usp=sharing" },
   { tag: "Panitia",     title: "Sertifikat ELCO 2026", issuer: "HIMPROTE FT UNNES", date: "2026", image: "sertifelco.png", link: "" },
  
 ],
   
   skillsBox: { title: "Technical Skills", text: "Saya mampu mengaplikasikan ide saya dengan baik dan mengomunikasikannya melalui media informatif." },
-  skills: ["MATLAB", "Python", "Arduino", "HTML", "SQL", "PHP","Javasript"],
-  skillsBox: { title: "Soft Skills", text: "Saya mampu berbicara didepan banyak orang, dan menjadi orang yang komunikatif di dalam tim. berdasarkan pengalaman berorganisasi manajemen waktu saya dinilai baik." },
-  skills: ["Komunikatif", "Public Speaking", "Disiplin", "Berpenampilan rapi", "Bekerja dalam Tim", "Kreativitas"],
-  toolsBox: { title: "Tools I Use", text: "Berikut adalah Tools yang saya gunakan untuk membantu saya bekerja." },
-  tools: ["VS Code", "MATLAB", "Arduino IDE", "HTML", "Adobe Photoshop", "VS Code" , "GitHub", "Figma", "SQL", "Canva"],
+skills: ["MATLAB", "Python", "Arduino", "HTML", "SQL", "PHP", "JavaScript"],
+softBox: { title: "Soft Skills", text: "Saya mampu berbicara didepan banyak orang, dan menjadi orang yang komunikatif di dalam tim. berdasarkan pengalaman berorganisasi manajemen waktu saya dinilai baik." },
+softSkills: ["Komunikatif", "Public Speaking", "Disiplin", "Berpenampilan rapi", "Bekerja dalam Tim", "Kreativitas"],
+toolsBox: { title: "Tools I Use", text: "Berikut adalah Tools yang saya gunakan untuk membantu saya bekerja." },
+tools: ["VS Code", "MATLAB", "Arduino IDE", "HTML", "Adobe Photoshop", "GitHub", "Figma", "SQL", "Canva"],
+
   testimonials: [
     { photo: "", role: "Dosen",  rating: "4.9", text: "Sejujurnya Kelompok kalian adalah kelompok terbaik dan paling rapi dalam penulisan, risetnya juga sudah sangat bagus sekali setara Q3 Scopus. (AI)" },
     { photo: "", role: "Ketua Tim",       rating: "5.0", text: "Kemampuan Sindara Sudah memumpuni untuk membuat sumulasi rangkaian dan cara kerjanya, ide project ini juga berasal dari sindara. (Smart Solar Tracker)" },
@@ -363,6 +364,7 @@ document.querySelectorAll('.tabs button').forEach(b => b.onclick = () => {
   $('exp').hidden = b.dataset.tab !== 'exp';
   $('edu').hidden = b.dataset.tab !== 'edu';
 });
+
 $('certGrid').innerHTML = DATA.certificates.map(c => {
   const href = c.link || c.image;
   return `
@@ -376,9 +378,15 @@ $('certGrid').innerHTML = DATA.certificates.map(c => {
     </div>
   </article>`;
 }).join('');
+
 $('skillTitle').textContent = DATA.skillsBox.title;
 $('skillText').textContent = DATA.skillsBox.text;
 $('skills').innerHTML = DATA.skills.map(s => `<li>${s}</li>`).join('');
+
+$('softTitle').textContent = DATA.softBox.title;
+$('softText').textContent = DATA.softBox.text;
+$('soft').innerHTML = DATA.softSkills.map(s => `<li>${s}</li>`).join('');
+
 $('toolTitle').textContent = DATA.toolsBox.title;
 $('toolText').textContent = DATA.toolsBox.text;
 $('tools').innerHTML = DATA.tools.map(s => `<li>${s}</li>`).join('');
