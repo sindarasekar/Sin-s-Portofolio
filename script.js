@@ -91,7 +91,7 @@ const DATA = {
 };
 
 /* =====================================================
-   WEB AUDIO API SOUND EFFECTS ENGINE (Zero External MP3)
+   WEB AUDIO API SOUND EFFECTS ENGINE
    ===================================================== */
 const SFX = (() => {
   let ctx = null;
@@ -146,6 +146,12 @@ const SFX = (() => {
       tone(520, 260, 0.07, 'triangle', 0.075);
       tone(880, 620, 0.045, 'sine', 0.035, 0.015);
     },
+    grab() {
+      tone(320, 540, 0.06, 'sine', 0.06);
+    },
+    release() {
+      tone(540, 240, 0.12, 'triangle', 0.055);
+    },
     tab() {
       tone(420, 680, 0.08, 'sine', 0.055);
       tone(680, 920, 0.09, 'triangle', 0.04, 0.04);
@@ -174,10 +180,11 @@ const media = (el, src, alt, label) => {
 document.title = DATA.name + ' | Portfolio';
 $('brand').textContent = DATA.brand;
 $('name').textContent = DATA.name;
+$('cardName').textContent = DATA.name;
+$('cardRole').textContent = DATA.roles.filter(Boolean).join(' • ');
 $('socials').innerHTML = DATA.socials.map(link).join('');
 ['resume1', 'resume2'].forEach(id => { DATA.resume ? $(id).href = DATA.resume : $(id).hidden = true; });
 media($('heroPhoto'), DATA.photo, DATA.name, initials(DATA.name));
-if (DATA.photo) $('heroPhoto').classList.add('pop');
 media($('aboutPhoto'), DATA.aboutPhoto, DATA.name, initials(DATA.name));
 $('aboutTitle').textContent = DATA.about.title;
 $('aboutText').innerHTML = DATA.about.text;
@@ -301,15 +308,115 @@ sfxBtn.onclick = () => {
   syncSfxUI();
 };
 
-// Bind hover & click SFX across interactive elements
+// Bind hover & click SFX
 document.addEventListener('pointerenter', e => {
-  const target = e.target.closest('a, button, .chips li, .card, .tl');
+  const target = e.target.closest('a, button, .chips li, .card, .tl, .id-card');
   if (target) SFX.hover();
 }, true);
 
 document.addEventListener('click', e => {
   if (e.target.closest('[data-sfx="click"]')) SFX.click();
 });
+
+/* =====================================================
+   INTERACTIVE 3D LANYARD PHYSICS ENGINE
+   ===================================================== */
+(() => {
+  const stage = $('lanyardStage');
+  const wrap = $('lanyardCardWrap');
+  const card = $('lanyardCard');
+  const holo = $('idHolo');
+  const strapBack = $('strapBack');
+  const strapMain = $('strapMain');
+  const strapLine = $('strapLine');
+  if (!stage || !wrap) return;
+
+  let x = 0, y = 0, vx = 0, vy = 0;
+  let dragging = false, startX = 0, startY = 0, baseX = 0, baseY = 0;
+  let t = 0;
+
+  // Initial drop-in swing impulse
+  x = 34; y = -28; vx = -4;
+
+  const clamp = (v, min, max) => Math.max(min, Math.min(max, v));
+
+  wrap.addEventListener('pointerdown', e => {
+    dragging = true;
+    wrap.classList.add('dragging');
+    wrap.setPointerCapture(e.pointerId);
+    startX = e.clientX;
+    startY = e.clientY;
+    baseX = x;
+    baseY = y;
+    vx = 0; vy = 0;
+    SFX.grab();
+  });
+
+  window.addEventListener('pointermove', e => {
+    if (!dragging) return;
+    const dx = e.clientX - startX;
+    const dy = e.clientY - startY;
+    const nx = clamp(baseX + dx, -180, 180);
+    const ny = clamp(baseY + dy, -110, 120);
+    vx = (nx - x) * 0.55;
+    vy = (ny - y) * 0.55;
+    x = nx;
+    y = ny;
+  });
+
+  const endDrag = () => {
+    if (!dragging) return;
+    dragging = false;
+    wrap.classList.remove('dragging');
+    SFX.release();
+  };
+  window.addEventListener('pointerup', endDrag);
+  window.addEventListener('pointercancel', endDrag);
+
+  const step = () => {
+    t += 0.028;
+    if (!dragging) {
+      // Gentle natural air sway + spring return to center
+      const targetX = Math.sin(t) * 6;
+      const targetY = Math.cos(t * 1.4) * 3;
+      const k = 0.065;
+      const damp = 0.89;
+      vx = (vx + (targetX - x) * k) * damp;
+      vy = (vy + (targetY - y) * k) * damp;
+      x += vx;
+      y += vy;
+    }
+
+    const rotZ = clamp(-x * 0.14 - vx * 0.85, -32, 32);
+    const rotY = clamp(x * 0.18, -28, 28);
+    const rotX = clamp(-y * 0.12, -18, 18);
+
+    wrap.style.transform = `translate3d(${x.toFixed(2)}px, ${y.toFixed(2)}px, 0) rotateZ(${rotZ.toFixed(2)}deg)`;
+    card.style.transform = `rotateY(${rotY.toFixed(2)}deg) rotateX(${rotX.toFixed(2)}deg)`;
+    holo.style.setProperty('--glare', `${(-35 + x * 0.45).toFixed(1)}%`);
+
+    // Update flexible SVG lanyard strap from top center to clip top
+    const sw = stage.offsetWidth || 320;
+    const sh = stage.offsetHeight || 520;
+    const anchorX = sw / 2;
+    const anchorY = 0; // top of SVG (-90px above stage)
+    const clipRestY = sh + 90 - wrap.offsetHeight - 24;
+    const endX = anchorX + x;
+    const endY = clipRestY + y;
+
+    // Control point lags slightly for realistic strap curve
+    const ctrlX = anchorX + x * 0.42 - vx * 1.6;
+    const ctrlY = (anchorY + endY) * 0.55 + Math.abs(x) * 0.15;
+
+    const d = `M ${anchorX - 18} ${anchorY} Q ${ctrlX - 6} ${ctrlY} ${endX} ${endY} M ${anchorX + 18} ${anchorY} Q ${ctrlX + 6} ${ctrlY} ${endX} ${endY}`;
+    strapBack.setAttribute('d', d);
+    strapMain.setAttribute('d', d);
+    strapLine.setAttribute('d', d);
+
+    requestAnimationFrame(step);
+  };
+  requestAnimationFrame(step);
+})();
 
 /* =====================================================
    PRELOADER, SCROLL REVEAL, 3D TILT & PARTICLE CANVAS
@@ -328,7 +435,6 @@ const io = new IntersectionObserver(entries => {
 }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
 document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-// Scroll Progress, Sticky Header, Active Nav & Back-to-Top
 const progress = $('progress'), header = $('topHeader'), toTop = $('toTop');
 const navLinks = [...document.querySelectorAll('#menu a')];
 const sections = navLinks.map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
@@ -353,7 +459,6 @@ toTop.onclick = () => {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 };
 
-// Desktop Spotlight & 3D Tilt Cards
 if (window.matchMedia('(pointer: fine)').matches) {
   window.addEventListener('mousemove', e => {
     document.body.classList.add('pointer-active');

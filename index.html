@@ -61,7 +61,50 @@
             <a class="btn btn-ghost" href="#projects" data-sfx="click">Explore Projects</a>
           </div>
         </div>
-        <div class="photo hero-in" id="heroPhoto" style="--d:260ms"></div>
+
+        <!-- Interactive 3D Swinging Lanyard ID Card -->
+        <div class="lanyard-stage hero-in" id="lanyardStage" style="--d:260ms">
+          <svg class="lanyard-svg" id="lanyardSvg" aria-hidden="true">
+            <defs>
+              <linearGradient id="strapGrad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#1e3a8a"/>
+                <stop offset="50%" stop-color="#2f7bff"/>
+                <stop offset="100%" stop-color="#38bdf8"/>
+              </linearGradient>
+            </defs>
+            <!-- Strap back & front curves -->
+            <path id="strapBack" fill="none" stroke="rgba(15,23,42,0.85)" stroke-width="22" stroke-linecap="round"/>
+            <path id="strapMain" fill="none" stroke="url(#strapGrad)" stroke-width="18" stroke-linecap="round"/>
+            <path id="strapLine" fill="none" stroke="rgba(255,255,255,0.28)" stroke-width="2" stroke-dasharray="6 8" stroke-linecap="round"/>
+          </svg>
+
+          <div class="lanyard-card-wrap" id="lanyardCardWrap">
+            <div class="lanyard-clip" aria-hidden="true">
+              <div class="clip-ring"></div>
+              <div class="clip-body"></div>
+            </div>
+            <div class="id-card" id="lanyardCard" role="img" aria-label="Interactive ID Card">
+              <div class="id-holo" id="idHolo"></div>
+              <div class="id-slot"></div>
+              <div class="id-top">
+                <span class="id-org">FT UNNES</span>
+                <span class="id-status"><i class="dot"></i>OPEN</span>
+              </div>
+              <div class="id-photo" id="heroPhoto"></div>
+              <div class="id-info">
+                <div class="id-name" id="cardName"></div>
+                <div class="id-role" id="cardRole"></div>
+              </div>
+              <div class="id-footer">
+                <div class="id-barcode" aria-hidden="true">
+                  <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+                </div>
+                <span class="id-code">CE • 2026</span>
+              </div>
+            </div>
+          </div>
+          <div class="lanyard-hint">✦ Drag &amp; swing card</div>
+        </div>
       </div>
     </section>
 
