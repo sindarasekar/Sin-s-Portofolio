@@ -62,9 +62,9 @@ const DATA = {
     { tag: "Penghargaan", title: "International Youth Goals Singapre,Malaysia and Thailand Batch 2", issuer: "B1G FAIR in collaboration with Olpedia Education Center", date: "2025", image: "iyg.png", link: "https://drive.google.com/file/d/1qFVByK_ff28Xg6Zmge-sPuwmLo8kNw8Y/view?usp=sharing" },
     { tag: "Panitia", title: "Sertifikat ELCO 2026", issuer: "HIMPROTE FT UNNES", date: "2026", image: "sertifelco.png", link: "" },
     { tag: "Panitia", title: "Sertifikat Class Multimedia Skill 2026", issuer: "HIMPROTE FT UNNES", date: "2026", image: "sertifcms.png", link: "" },
-    { tag: "Panitia", title: "Sertifikat Electrical Cup 2025", issuer: "HIMPROTE FT UNNES", date: "2026", image: "sertifelcup.png", link: "" },
+    { tag: "Panitia", title: "Sertifikat Electrical Cup 2025", issuer: "HIMPROTE FT UNNES", date: "2026", image: "sertifelcup.png", link: "https://drive.google.com/file/d/1mig57XsONNvusxHU9LGC0X2n84yYLSOE/view?usp=sharing" },
     { tag: "Panitia", title: "Sertifikat Pelatian Administrasi dan Sponsorship 2026", issuer: "HIMPROTE FT UNNES", date: "2026", image: "sertifpas.png", link: "" },
-    { tag: "Panitia", title: "Sertifikat PILMAPRES 2026", issuer: "HIMPROTE FT UNNES", date: "2026", image: "sertifpilmapres.png", link: "" }
+    { tag: "Panitia", title: "Sertifikat PILMAPRES 2026", issuer: "HIMPROTE FT UNNES", date: "2026", image: "sertifpilmapres.png", link: "https://drive.google.com/file/d/1kb5nq_HYQxHZJOZw1iY6bPDfJ-VXFC4A/view?usp=sharing" }
   ],
   skillsBox: { title: "Technical Skills", text: "Saya mampu mengaplikasikan ide saya dengan baik dan mengomunikasikannya melalui media informatif." },
   skills: ["MATLAB", "Python", "Arduino", "HTML", "SQL", "PHP", "JavaScript"],
